@@ -1,0 +1,14 @@
+# Upstream code and all raw runtime data stay local.
+.upstream/
+.local/
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.log
+login_state/
+attack_surface/
+shared-tmpfs/
+.DS_Store

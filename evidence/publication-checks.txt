@@ -1,0 +1,7 @@
+October 20, 2026 — initial PR publication review
+Manual review: all 11 proposed text files inspected; no credentials, tokens, captured requests or login states included.
+Gitleaks default rules, redacted directory scan of exact proposed file snapshot: exit 0, no leaks found.
+Ignore checks: .env, .local raw logs, and upstream login state excluded.
+Shell helper syntax: PASS.
+Offline preflight repeated: 6 passed, 5 blocked; live experiments NOT RUN.
+Secret scanning is pattern-based; publication also relies on the small, manually reviewed file set.

@@ -1,0 +1,15 @@
+Platform: Darwin arm64
+Python: 3.14.7
+BLOCKED Linux experiment host
+BLOCKED Suggested Python 3.11 baseline (not yet runtime validated)
+PASS Pinned upstream 94470790c0941c7cb628712b81e10e154d97928a
+PASS Upstream unchanged
+requirements.txt SHA256: 02c749e9bf5f95bcbfd94bb79ae52d7503452a30a6d481569847c7d1214b50d5
+PASS Python source parse (52 files; no imports)
+BLOCKED docker on PATH
+PASS git on PATH
+PASS curl on PATH
+PASS nc on PATH
+BLOCKED timeout on PATH
+BLOCKED xvfb-run on PATH
+Summary: 6 passed, 5 blocked; live crawl/checker/SQL validation NOT RUN

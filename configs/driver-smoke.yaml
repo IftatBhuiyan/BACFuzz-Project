@@ -1,0 +1,29 @@
+# Group proposal: five-minute driver-only smoke; not a reproduction result.
+PROJECT_NAME: "CVE_2025_0802"
+HOMEPAGE_URL: "http://localhost:8088/"
+NONCE_KEYWORD: "nonce"
+COOKIE_KEYWORD: "cookie"
+AVOIDED_REQUEST_POST_DATA: []
+
+UNIQUE_STRING: "bacfuzz"
+UNIQUE_NUMBER: 5342
+COV_PATHS: "../../shared-tmpfs/coverage-reports/"
+MYSQL_PATHS: "../../shared-tmpfs/mysql-error-reports/"
+
+LOGIN_PAGE_PHRASES: ['Username or Email Address','value="Log In"','Login']
+UNAUTHORIZED_PAGE_PHRASES: ["Unauthorized"]
+
+NO_NEW_PATH_MAX: 5
+
+# Preserve example order pending Arian review: checker excludes index 0.
+USER_ROLES: ["Admin", "LeaveManager", "Salary", "BorrowManager", "Anonymous"]
+AVOIDED_LINKS: ["logout","reset","activate","deactivate","upgrade","plugin-install.php","mailto:"]
+IGNORING_SQL: []
+RUNNING_TIME: { h: 0, m: 5 }
+RESTRICTED_LINKS: [
+  "Admin": ["activate","deactivate","upgrade","plugin-install.php"],
+  "LeaveManager": [],
+  "Salary": [],
+  "BorrowManager": [],
+  "Anonymous": []
+]
