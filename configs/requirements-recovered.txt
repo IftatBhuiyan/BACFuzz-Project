@@ -1,0 +1,3 @@
+# Exact upstream pins, with the unavailable LiteLLM release recovered from its official tag commit.
+-r ../.upstream/BACFuzz/bacfuzz/requirements.txt
+litellm @ git+https://github.com/BerriAI/litellm.git@3f96a8c6674ccab8f10a254d7b959e8adbed055d

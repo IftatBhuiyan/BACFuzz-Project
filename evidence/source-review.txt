@@ -1,0 +1,28 @@
+Source inspection only; no upstream code imported or executed.
+UTC captured: 2026-10-20T18:42:06.177850+00:00
+Upstream HEAD: 94470790c0941c7cb628712b81e10e154d97928a
+SHA256 f4b122cf26648f6a42362e87712509ea8683d14d92cc45db067efc5f7a793912 bacfuzz/scripts/setup.sh
+SHA256 f9bd1dafb90c0bdfd78f7b99eac161c577f8a7b6e089c7e4afdcded8759b7ee3 bacfuzz/scripts/fuzzer-CVE_2025_0802.sh
+SHA256 06b5383bce968d4876fbd33ee5f3080c81549ea1a2e6aad4398a941c73201a76 bacfuzz/fuzzer/fuzzer.py
+SHA256 7c10967c1e7dbcd8a42311fe32904c29347b12fcda356866c7f36c507170023e bacfuzz/fuzzer/main_driver.py
+SHA256 24d1e78a0231de80a57a7645373cee491b97fb9d9b8e31887b2bc351bc9f530e bacfuzz/fuzzer/Dictionary.py
+SHA256 e3c0bfa71c91d3c38193040685f698ac774040cf46969d86e7d28f22671015b1 bacfuzz/fuzzer/config.py
+SHA256 ace6c6b82746dfbd54decdb8f7b0f96800157999d33cb9084ca0caf7f876d34a bacfuzz/configs/config-general.yaml
+SHA256 e9e7478808b02cca4bdaa2bb8fedf8ab883d38067d5ee7abc86a1af77f7d8dd6 WUT/CVE_2025_0802/docker-compose.yaml
+
+Verified source observations:
+setup.sh: missing bacfuzz/get-pip.py; source venv is not activation file.
+Example campaign: 24h driver then target reset then 24h checker.
+fuzzer.py: nonzero-only CLI time overrides; only-driver disables checker.
+main_driver.py: headed Chromium; AICaller in collection pipeline; per-role YAML storage.
+Dictionary.py: attack_surface/<project>/paramval.yaml.
+Compose: mysql:8.4.0, phpmyadmin:5.2.1; 8088 and 8801; Docker socket mount.
+
+Local helper checks:
+bash -n scripts/fetch-upstream.sh: PASS
+bash scripts/fetch-upstream.sh: PASS (existing clean checkout; detached at pin)
+preflight.py AST parse: PASS
+Smoke YAML runtime load: NOT RUN (PyYAML unavailable in host Python)
+Requirement entries: 62 exact pins; no dependency installation attempted.
+Git ignore checks: .local run log, upstream login-state example and .env ignored.
+Host global ignore hides .gitignore; local .git/info/exclude override makes it visible.
