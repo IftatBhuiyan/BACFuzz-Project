@@ -1,0 +1,15 @@
+Runtime preparation checks — October 20, 2026
+Host: macOS arm64; Python 3.11.15 (local preparation only).
+Original requirements resolution against PyPI: FAIL, litellm==1.44.4 unavailable.
+Recovery: official BerriAI/litellm v1.44.4 tag resolves to commit 3f96a8c6674ccab8f10a254d7b959e8adbed055d.
+Manifest: configs/requirements-recovered.txt includes the unchanged upstream requirements and adds this exact source URL.
+uv installation using recovered manifest: PASS, 62 packages resolved.
+Installed metadata compared to all 62 upstream exact version pins: PASS, every version matches.
+uv pip check: PASS, all 62 packages compatible.
+Fuzzer/MainDriver imports (without init/main invocation; provider credentials removed from child environment): PASS.
+Pinned PyYAML 6.0.2 loading smoke config: PASS, target/budget/role-order assertions passed.
+Playwright 1.45.1 browser installation: PASS.
+Headless Chromium startup: PASS, browser 127.0.6533.17; no target navigation.
+Upstream working tree after probes: unchanged.
+Linux setup, headed/Xvfb operation, target deployment, login, request collection, checker and SQL validation: NOT RUN.
+Raw command outputs and installed dependency snapshot retained under ignored .local/.

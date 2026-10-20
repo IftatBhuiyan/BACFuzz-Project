@@ -1,0 +1,16 @@
+Repository setup validation — October 20, 2026
+Fresh .local/venv created with Python 3.11.15 using scripts/setup-python.sh: PASS (exit 0).
+Recovered dependency manifest install, compatibility check and installed-version capture: PASS.
+Repeat setup using the existing environment: PASS (exit 0); environment creation skipped.
+Runtime checker with --browser: 4 passed, 0 failed, 0 skipped.
+  Versions/provenance: all 62 exact upstream pins and official LiteLLM commit match.
+  Configuration: five-minute CVE_2025_0802 target/budget/role-order checks passed.
+  Imports: fuzzer/MainDriver import succeeded without campaign initialization.
+  Browser: Chromium 127.0.6533.17 started headlessly; no page opened.
+Default runtime checker: 3 passed, 0 failed, 1 explicit browser skip.
+Preflight generated-file regression probe: PASS; untracked invalid Python excluded, 52 tracked sources parsed.
+Current Python 3.11 preflight: 7 passed, 4 blocked (Linux host, Docker, timeout, xvfb-run).
+Shell helper syntax and git diff whitespace checks: PASS.
+Upstream working tree: unchanged after checks.
+All live target/login/crawl/API/checker/SQL gates: NOT RUN.
+Raw private stage logs and exit status: .local/setup/<UTC-time>-<pid>/.

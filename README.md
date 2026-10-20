@@ -9,8 +9,9 @@ We reproduce selected experiments from [websecfuzz/BACFuzz](https://github.com/w
 - `configs/driver-smoke.yaml`: proposed five-minute collection configuration
 - `evidence/`: reviewed, non-sensitive checks; `.local/`: ignored raw run evidence
 
-Start with `bash scripts/fetch-upstream.sh`, then `python3 scripts/preflight.py`.
-The preflight is offline and does not start applications or contact an API.
+Start with `bash scripts/fetch-upstream.sh`, then `bash scripts/setup-python.sh` using Python 3.11. The setup helper installs the recovered exact-version dependencies and saves private logs. Use `.local/venv/bin/python scripts/check-runtime.py` for package/config/import checks, or add `--browser` after installing Chromium. See setup notes for Linux browser libraries and isolation.
+
+`python3 scripts/preflight.py` is an offline host inventory. It does not start applications or contact an API. Local dependency/import/browser checks have passed; SPHERE project activation, Linux deployment and experimental collection remain blocked.
 
 Iftat owns shared setup, MainDriver collection, configuration and logs. Arian owns ActiveChecker, DeepSeek and mutation. Taamim owns the isolated Docker target, accounts and SQL validation. One owner runs each target instance at a time.
 

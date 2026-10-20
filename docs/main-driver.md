@@ -13,11 +13,12 @@ Copy `configs/driver-smoke.yaml` to `.upstream/BACFuzz/bacfuzz/configs/group-dri
 
 ```sh
 # From group repository root; raw evidence remains ignored/private.
+repo_root=$(pwd)
 mkdir -p .local/run-001
 # In a separate shell whose output is redirected to a private log:
 cd .upstream/BACFuzz/bacfuzz/fuzzer
 # Use xvfb-run -a if the VM has no graphical session.
-../venv/bin/python -u fuzzer.py --config group-driver-smoke.yaml --only-driver y
+"$repo_root/.local/venv/bin/python" -u fuzzer.py --config group-driver-smoke.yaml --only-driver y
 ```
 
 For a live execution, redirect stdout/stderr to the absolute `.local/run-001/driver.log` path, retain the process exit status separately, and record start/end UTC. Apply an outer watchdog (e.g. GNU `timeout --signal=TERM --kill-after=30s 10m ...`); exit 124 means timeout, not success. A hard stop may prevent final dictionary writes. Five minutes is the internal campaign budget, not a guarantee of total wall time: login precedes crawling. No launch wrapper is supplied until target isolation and account readiness are established.

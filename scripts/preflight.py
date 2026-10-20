@@ -15,12 +15,12 @@ def check(label, ok, detail=''):
     global passed, blocked
     passed += bool(ok)
     blocked += not ok
-    print(f"{'PASS' if ok else 'BLOCKED'} {label} {detail}")
+    print(f"{'PASS' if ok else 'BLOCKED'} {label} {detail}".rstrip())
 
 print('Platform:', platform.system(), platform.machine())
 print('Python:', platform.python_version())
 check('Linux experiment host', platform.system() == 'Linux')
-check('Suggested Python 3.11 baseline (not yet runtime validated)', platform.python_version_tuple()[:2] == ('3', '11'))
+check('Python 3.11 baseline (locally validated; Linux pending)', platform.python_version_tuple()[:2] == ('3', '11'))
 if (upstream / '.git').exists():
     revision = subprocess.check_output(['git', '-C', str(upstream), 'rev-parse', 'HEAD'], text=True).strip()
     check('Pinned upstream', revision == (root / 'upstream.lock').read_text().strip(), revision)
@@ -28,7 +28,9 @@ if (upstream / '.git').exists():
     check('Upstream unchanged', clean)
     req = upstream / 'bacfuzz/requirements.txt'
     print('requirements.txt SHA256:', hashlib.sha256(req.read_bytes()).hexdigest())
-    sources = sorted((upstream / 'bacfuzz').rglob('*.py'))
+    # Inspect tracked artifact source only, excluding generated environments and captures.
+    tracked = subprocess.check_output(['git', '-C', str(upstream), 'ls-files', '-z', '--', 'bacfuzz'], text=True)
+    sources = [upstream / name for name in tracked.split('\0') if name.endswith('.py')]
     errors = []
     for source in sources:
         try:
