@@ -4,7 +4,7 @@
 We use [websecfuzz/BACFuzz](https://github.com/websecfuzz/BACFuzz) at commit `94470790c0941c7cb628712b81e10e154d97928a`, recorded in `upstream.lock`. The authors' full checkout stays under ignored `.upstream/BACFuzz`; their existing results are not our experimental data. We do not edit or relicense their source. No root license file was found in the pinned artifact.
 
 ## Repeatable dependency setup
-Use a dedicated disposable Linux VM for experiments. Python 3.11 is our locally validated baseline; Linux runtime validation is still pending. The setup command also works for local preparation without launching a target.
+Use a dedicated disposable Linux VM for experiments. Python 3.11 is our locally validated baseline; Linux dependency and browser preparation also passed on October 23; target and campaign evidence remain separate. The setup command also works for local preparation without launching a target.
 
 ```sh
 bash scripts/fetch-upstream.sh
@@ -12,7 +12,7 @@ bash scripts/setup-python.sh
 .local/venv/bin/python scripts/check-runtime.py
 ```
 
-The setup helper needs Git and Python 3.11 (`python3.11` on PATH). To select an existing interpreter, set `BACFUZZ_PYTHON` to its executable path. It creates/reuses `.local/venv`, installs `configs/requirements-recovered.txt`, checks package compatibility, records installed versions, and validates package provenance, YAML, and upstream imports. It uses uv when available and otherwise the environment's pip. The uv route has been executed successfully; the pip fallback and Linux setup have not yet been executed.
+The setup helper needs Git and Python 3.11 (`python3.11` on PATH). To select an existing interpreter, set `BACFUZZ_PYTHON` to its executable path. It creates/reuses `.local/venv`, installs `configs/requirements-recovered.txt`, checks package compatibility, records installed versions, and validates package provenance, YAML, and upstream imports. It uses uv when available and otherwise the environment's pip. The uv route has been executed successfully on macOS and Linux; the pip fallback remains untested.
 
 Each attempt saves private stage logs and its exit status under `.local/setup/<UTC-time>-<pid>/`. A failed stage stops setup and identifies its log. Failures before an output directory can be created, such as a missing interpreter or upstream checkout, are reported directly. Setup does not deploy an application, log in, collect requests, or call a model. Re-running it preserves the environment and does not reset experiment data. Package installation requires network access.
 
@@ -32,7 +32,9 @@ Install browser binaries separately, then request the browser startup check:
 For Linux OS libraries, use the VM administrator's supported package workflow; Playwright's `install-deps chromium` can request elevated package installation. Both auto-login and MainDriver use `headless=False`, so a graphical display or Xvfb is required for the actual crawl. Our browser check starts headless Chromium without opening a page; it does not validate headed/Xvfb operation or login.
 
 ## Isolated execution host
-SPHERE project `bacfuzz` is separate from all course labs but is currently **Pending**. Server requests return `Project is not active`. Administrator activation is needed before teammates and resources can be provisioned. Intended Active Members are Arian `hunter493ncgj` and Tam `hunter493byej`; neither has been added yet.
+SPHERE project `bacfuzz` is approved. Arian `hunter493ncgj` and Tam `hunter493byej` are Active Members. On October 23 we created `reproduction.bacfuzz`, shared gateway `dev.bacfuzz`, and reservation `smoke001` with one Ubuntu `2404` VM named `runner`, requiring at least four cores and 8 GB memory. SPHERE reports successful activation and zero public ingresses. The one-day reservation expires October 24; copy evidence to persistent storage before release. The model is in `configs/sphere-model.py`, saved in SPHERE as revision `a3c9e0ee7d9255661e5681d017fe4661f441c37e`.
+
+Direct Jupyter startup on the VM failed with a 30-second server-response timeout. JupyterLab on the dedicated gateway works. SSH from the gateway reached the dedicated runner. It reports Ubuntu 24.04.4 LTS and x86_64. An initial noninteractive sudo check failed, and direct root SSH was denied. An interactive SSH session subsequently passed the sudo check. We installed and checked the Linux runtime, deployed the supplied WUT, and completed a separate normal-browser baseline; see [the dated deployment record](browser-baseline.md). Full MainDriver/checker and permission/SQL validation remain unfinished.
 
 The supplied target mounts `/var/run/docker.sock`, shares `shared-tmpfs`, and publishes web 8088 and phpMyAdmin 8801 on all interfaces by default. Taamim must inspect it, confine VM ingress and egress, and document any loopback-port changes before starting it. A container alone is not sufficient isolation for this artifact. Use only supplied fixture accounts and data inside the disposable VM; keep all tests within the provided WUT. Do not launch the authors' experiment script on a personal Docker host.
 

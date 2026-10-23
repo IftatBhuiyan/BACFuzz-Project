@@ -1,0 +1,16 @@
+SPHERE provisioning evidence — October 23, 2026
+Verified: both classmates Member / Active in bacfuzz.
+Experiment: reproduction.bacfuzz
+Model revision: a3c9e0ee7d9255661e5681d017fe4661f441c37e
+Requested node: runner, image 2404, >=4 cores, >=8 GB RAM.
+Shared XDC: dev.bacfuzz, xdc-base:v1.8.3
+Reservation: smoke001, one day, expires October 24.
+Activation table: Success, virtual nodes 1, ingresses 0.
+Jupyter on runner: FAILED, server did not respond in 30 seconds.
+Jupyter on gateway: started, terminal reachable.
+SSH runner: reached Ubuntu 24.04.4 LTS, x86_64.
+Docker: absent. Noninteractive sudo: password required. Root SSH: denied.
+First setup attempt: /project permission denied before package installation.
+Actual Python/Docker/browser version verification: pending.
+WUT deployment, fixture login and live collection: NOT completed.
+No other lab resources modified. Raw screenshots remain ignored/private.
