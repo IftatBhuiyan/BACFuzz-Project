@@ -54,3 +54,19 @@ A successful activation does not prove application readiness. Direct Jupyter on 
 Private evidence includes `.local/sphere-setup/members-active-Oct-23.png`, `gateway-attached-Oct23.png`, `runner-jupyter-failed-Oct23.png` and a sanitized text copy of the failure. Authentication query parameters from Jupyter navigation are excluded from report text and Git.
 
 Arian has not supplied approved DeepSeek access for our crawl. This remains his integration dependency because MainDriver can invoke the model during parameter analysis. A manual browser collection without model calls can establish a separate application baseline once Tam supplies or verifies the isolated target/accounts. It must not be presented as a completed MainDriver campaign.
+
+
+## October 23 follow-up: Linux preparation passed
+
+We recovered administrator access through an interactive SSH session and verified `sudo -n true`. We corrected the unwritable `/project` destination to a dedicated home-directory working path. The corrected installer completed on Ubuntu 24.04.4 LTS with Docker Engine 29.1.3, Compose 2.40.3, uv 0.13.5 and Python 3.11.17. All 62 package versions matched the upstream pins, package compatibility passed, and the Linux runtime checker reported four passed, zero failed and zero skipped. Headed Chromium 127.0.6533.17 also started successfully under Xvfb. No application page or provider call was part of these checks.
+
+These results extend the earlier macOS-only preparation evidence. The pip fallback remains untested. The first permission failure and direct-node Jupyter failure remain in the historical record. See `evidence/linux-runtime-checks-Oct23.txt`; raw outputs remain private.
+
+
+## October 23 follow-up: deployed target and captured real baseline traffic
+
+We built the supplied application and DB after resolving Docker Hub IPv6 connectivity using a temporary observed-IPv4 hostname mapping. We removed that mapping after successful builds. MySQL initially could not read its seed SQL file; our generated inline Dockerfile now uses `COPY --chmod=0644`. Only the newly created, partially initialized fixture DB was reset, before any group collection. We preserved the original build/start failures.
+
+We retained an internal-only Docker network. The requested host port mapping was inactive, so an unprivileged loopback relay connected `127.0.0.1:8088` to the web container. We verified the listener and HTTP 200, then ran a bounded, separate normal-browser baseline. It completed with exit 0 and captured 135 local requests across five role contexts, including assets, plus eight blocked external-resource attempts. Three local responses were 403. We have not interpreted those against a permission policy. No model, MainDriver or checker execution occurred.
+
+Private captures, login states, screenshots, generated configuration, logs and reviewed summary were copied to the project's persistent XDC storage with BACFuzz-group read access and no world access. The owner's `~/BACFuzz-evidence-latest-path.txt` points to the bundle. Public evidence and method details are in `evidence/browser-baseline-Oct23.txt` and `docs/browser-baseline.md`.

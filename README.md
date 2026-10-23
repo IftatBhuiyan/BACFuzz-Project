@@ -6,6 +6,7 @@ We reproduce selected experiments from [websecfuzz/BACFuzz](https://github.com/w
 - [Setup and versions](docs/setup.md)
 - [MainDriver collection and handoff](docs/main-driver.md), including offline capture inventory
 - [Completed work and blockers](docs/progress.md)
+- [First real browser baseline and deployment changes](docs/browser-baseline.md)
 - `configs/driver-smoke.yaml`: proposed five-minute collection configuration
 - `evidence/`: reviewed, non-sensitive checks; `.local/`: ignored raw run evidence
 
