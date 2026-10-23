@@ -37,3 +37,20 @@ Installation using the recovery manifest succeeded in the local Python 3.11.15 e
 Reviewed results: `evidence/runtime-setup-checks.txt`. Private outputs: `.local/dependency-source-recovery.log`, `.local/dependency-recovered-manifest.log`, `.local/dependency-check.log`, `.local/pinned-version-check.log`, `.local/runtime-import.log`, `.local/browser-install.log`, `.local/browser-startup-check.log`, and `.local/installed-dependencies.txt`.
 
 Remaining blockers are SPHERE project activation, adding both confirmed teammate accounts, dedicated Linux resource provisioning, isolated target/account setup and approved DeepSeek access. No experimental HTTP requests have been collected yet. The recovery configuration, reviewed evidence and notes are included in PR #1; raw logs and screenshots remain private.
+
+
+## October 23: approved project and dedicated resources
+
+We verified both classmates as Member / Active and created only BACFuzz resources:
+
+- Experiment `reproduction.bacfuzz`.
+- Shared gateway `dev.bacfuzz`, XDC image `xdc-base:v1.8.3`.
+- Compiled model revision `a3c9e0ee7d9255661e5681d017fe4661f441c37e`.
+- Reservation `smoke001`, one virtual `runner`, requested Ubuntu image `2404`, at least 4 cores and 8 GB RAM, one-day duration, expiring October 24.
+- Activation `smoke001.reproduction.bacfuzz` reported Success, one VM and zero public ingresses. No other class environment changed.
+
+A successful activation does not prove application readiness. Direct Jupyter on `runner` failed because its server did not respond in 30 seconds. We saved that error privately and started JupyterLab on the BACFuzz gateway instead. The gateway terminal and user SSH to runner work. The runner reports Ubuntu 24.04.4 LTS, x86_64 and /usr/bin/python3. Docker is absent. Noninteractive sudo requires a password; direct root SSH was denied. Our first setup attempt failed before package installation because /project is not writable on the VM. We will keep node-local work under a dedicated home-directory path and copy evidence to persistent gateway storage. Runtime installation, Docker deployment, fixture-role verification and request collection have not completed.
+
+Private evidence includes `.local/sphere-setup/members-active-Oct-23.png`, `gateway-attached-Oct23.png`, `runner-jupyter-failed-Oct23.png` and a sanitized text copy of the failure. Authentication query parameters from Jupyter navigation are excluded from report text and Git.
+
+Arian has not supplied approved DeepSeek access for our crawl. This remains his integration dependency because MainDriver can invoke the model during parameter analysis. A manual browser collection without model calls can establish a separate application baseline once Tam supplies or verifies the isolated target/accounts. It must not be presented as a completed MainDriver campaign.

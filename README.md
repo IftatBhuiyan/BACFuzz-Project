@@ -4,7 +4,7 @@ Hunter College CSCI 493 · Presentation October 28, 2026
 We reproduce selected experiments from [websecfuzz/BACFuzz](https://github.com/websecfuzz/BACFuzz), “BACFuzz: Exposing the Silence on Broken Access Control Vulnerabilities in Web Applications.” This repository contains our setup, configuration, and evidence; upstream authors retain credit for their artifact. We have not reproduced a vulnerability yet.
 
 - [Setup and versions](docs/setup.md)
-- [MainDriver collection and handoff](docs/main-driver.md)
+- [MainDriver collection and handoff](docs/main-driver.md), including offline capture inventory
 - [Completed work and blockers](docs/progress.md)
 - `configs/driver-smoke.yaml`: proposed five-minute collection configuration
 - `evidence/`: reviewed, non-sensitive checks; `.local/`: ignored raw run evidence

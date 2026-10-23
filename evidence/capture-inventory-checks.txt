@@ -1,0 +1,14 @@
+Capture inventory validation — October 20, 2026
+PASS upstream serializer compatibility: 5 synthetic role captures counted; no network or crawl
+PASS malformed YAML: incomplete exit 1; parser content suppressed
+PASS Python object tag: inspected as syntax only; constructor not executed
+PASS symlink capture rejected
+PASS empty role: incomplete exit 1
+PASS missing dictionary: incomplete exit 1
+6 passed, 0 failed. All input was synthetic. No experimental requests collected.
+
+All fixtures were generated privately under .local/ and removed after validation.
+Upstream serializer import and stdout were retained privately in .local/inventory-serializer.log.
+The fixture used invented sentinel credentials, not real authentication material.
+No target was started, visited or fuzzed; no provider call was made.
+Dictionary presence and per-role request shape are structural checks only.
