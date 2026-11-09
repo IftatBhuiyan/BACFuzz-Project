@@ -1,0 +1,29 @@
+Linux runtime preparation — October 23, 2026
+Host: dedicated runner VM in smoke001.reproduction.bacfuzz; Ubuntu 24.04.4 LTS, x86_64.
+Access: gateway JupyterLab plus SSH runner. Interactive SSH session passed sudo -n true.
+Earlier direct-node Jupyter request failed: server did not respond within 30 seconds.
+Earlier noninteractive SSH sudo check required a password; direct root SSH denied.
+Earlier installation attempt under /project failed Permission denied before package installation.
+Corrected run uses dedicated home-directory paths and private logs.
+
+Installed/observed:
+Docker Engine client/server 29.1.3
+Docker Compose 2.40.3+ds1-0ubuntu1~24.04.1
+uv 0.13.5
+Project Python 3.11.17 (managed by uv); initial local macOS baseline was 3.11.15.
+Playwright 1.45.1 / Chromium 127.0.6533.17
+Pinned upstream 94470790c0941c7cb628712b81e10e154d97928a
+Group runtime setup used main commit 184135f5a9197f03a6c524c0c8e8b26fa4fbb0db.
+
+PASS fresh Linux dependency setup, compatibility and installed-version stages.
+PASS versions/provenance: all 62 exact package pins and official LiteLLM source commit.
+PASS YAML target/budget/role order.
+PASS fuzzer/MainDriver imports without initialization or a campaign.
+PASS headless Chromium startup without opening a page.
+Runtime checker: 4 passed, 0 failed, 0 skipped.
+PASS headed Chromium startup under xvfb-run, version 127.0.6533.17.
+No target navigation or provider call was part of the preparation checks.
+
+Warnings retained: hostname resolution warning from sudo; apt could not retrieve available kernel versions.
+Raw script, package output, stage logs and exit files are private on runner under bacfuzz-evidence/runtime-Oct23 and BACFuzz-Project/.local/setup.
+Target build and live collection are separate, subsequently recorded stages.

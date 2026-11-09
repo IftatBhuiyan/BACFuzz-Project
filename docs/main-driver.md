@@ -29,3 +29,25 @@ Before every run record owner, upstream SHA and diff, config hash, target image 
 Inspect per-role request counts and methods, and verify nonempty meaningful collection and successful role login rather than accepting exit 0 alone. Retain failures and stack traces privately. Share only manually reviewed redacted examples in Git; redact cookies, authorization, passwords, tokens, query/body credentials and response data. Simple regex replacement is not sufficient to guarantee safe publication.
 
 Arian receives collection/config/version metadata for checker work. Taamim receives candidate operations and verifies intended permissions and backend/SQL effects. A successful HTTP status alone is not an authorization violation. Record findings as confirmed, unconfirmed or false positive with evidence. Zero findings in a short run does not establish absence of a vulnerability.
+
+## Offline collection inventory
+
+After preserving a run's private outputs, inspect the capture directory with:
+
+```sh
+.local/venv/bin/python scripts/inventory-captures.py ".upstream/BACFuzz/bacfuzz/attack_surface/CVE_2025_0802"
+```
+
+The command is read-only and does not import the fuzzer, navigate to the target, replay requests or contact a model. It prints fixed role names, per-role counts and allowlisted HTTP methods. It does not print input paths, filenames, URLs, headers, cookies, bodies, parameter values or parser excerpts. It reads YAML syntax nodes instead of using the upstream Python-object loader. Files larger than 2 MiB, symlinks, malformed YAML and unexpected role-directory entries are rejected and counted without their contents being echoed.
+
+Exit 0 means the **structural inventory is complete**: all five expected roles have at least one request mapping containing a recognized method and nonempty URL fields; no entries were rejected or unexpected; and a nonempty regular `paramval.yaml` exists. Exit 1 means incomplete or unsupported input. Dictionary presence is checked, not dictionary contents or semantic compatibility with the checker. The summary is not a redacted request export. Inspect and share the underlying collection privately with Arian, and review the summary before including it in the report.
+
+A structurally complete inventory does **not** prove successful authentication, distinct permissions, sufficient crawl coverage, valid checker replay or a vulnerability. Login-state evidence and Taamim's permission/SQL checks remain separate gates. Use a fresh output directory for each run: old numbered YAML files can otherwise inflate counts.
+
+### Source observations for our report
+
+We traced `fuzzer.py:init` through role-specific login-state creation, then `MainDriver` request collection. At the pinned revision, `HTTPRequest.py:718–727` serializes `request.__dict__` using YAML and reconstructs requests using `yaml.Loader`. Nested parameter objects may have Python-specific tags, so our inventory inspects nodes without invoking those constructors. `main_driver.py:710–722` writes role-separated numbered files, while `Dictionary.py:250–260` writes the shared parameter dictionary. These files form the handoff to the checker; they can contain credentials and must stay private.
+
+The corpus contains requests selected and retained by MainDriver, rather than a complete network packet capture. `main_driver.py:410–423` deduplicates/stores corpus requests and conditionally writes their YAML. Its `payload_analyze` stage calls the model when `request.num_sysgen > 0`; driver-only execution therefore does not guarantee a model-free campaign. We have inspected these paths but have not yet observed them in a live crawl.
+
+Our offline compatibility probe used the actual upstream `HTTPRequest` serializer to create synthetic captures. It verified the inventory format and error handling; it is not a BACFuzz experiment or a reproduction result. See `evidence/capture-inventory-checks.txt`.

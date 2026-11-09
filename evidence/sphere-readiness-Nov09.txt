@@ -1,0 +1,87 @@
+SPHERE readiness check — November 9, 2026
+
+Observed in the authenticated SPHERE dashboard:
+- BACFuzz experiment reproduction initially showed Undeployed.
+- No reservations or XDCs were attached to reproduction.
+- Saved revision a3c9e0ee was available (compiled October 23).
+- Redeployed that saved revision as reproduction.reproduction.bacfuzz.
+- Reservation reached Activated; dashboard showed 4 cores and 8 GB RAM.
+- Initial reservation expiration: November 10, 2026. User subsequently
+  confirmed the December 13 final deadline and requested extension.
+- Created shared dev.bacfuzz gateway; dashboard showed dev-bacfuzz,
+  initially Not attached, expiration November 23, 2026, 4:29:08 PM.
+- Submitted attachment to reproduction.reproduction.bacfuzz.
+  Attachment subsequently completed and JupyterLab started successfully.
+- December 13 extension was rejected: "Date cannot be more than 30 days
+  from now". Both reservation and gateway were verified extended to
+  December 9, 2026, 4:00 PM. A further extension is needed for the final.
+- SSH runner succeeds. It is a fresh Ubuntu 24.04.4 x86_64 VM; old
+  node-local Docker/runtime installation did not persist.
+- Gateway still contains the October evidence pointer and archive.
+- Group repository clone succeeded; upstream checkout was restored at
+  94470790c0941c7cb628712b81e10e154d97928a.
+- Restored uv 0.13.5 and Python 3.11.17. setup-python.sh completed all
+  stages: environment, Python/installer versions, dependency install,
+  package compatibility, installed-version record and runtime check.
+- Noninteractive SSH sudo failed with "a password is required".
+  A persistent interactive SSH session subsequently passed sudo -v and
+  sudo -n id returned uid=0. No sudo policy changes were made.
+- Docker/browser OS packages installed. Chromium installation exited 0;
+  missing-library warning during initial download was followed by OS
+  dependency installation and a successful runtime check.
+- Final runtime check: 4 passed, 0 failed, 0 skipped; Chromium
+  127.0.6533.17. No target navigation/model/checker run in that check.
+- Generated isolated Compose configuration omits phpMyAdmin, publishes web
+  only on 127.0.0.1:8088, removes DB host ports and uses internal networking.
+  Applied recorded SQL seed COPY --chmod=0644 fix before the first build.
+  Compose configuration validation passed; upstream source is unchanged.
+- Target build completed with exit 0. Both web and DB containers started.
+  Runtime versions include Docker 29.1.3 and Compose 2.40.3.
+- Internal-network host publishing was inactive again. Restored unprivileged
+  socat relay on 127.0.0.1:8088, resolving the new web container address
+  dynamically rather than reusing the October address. Early probes failed
+  during startup; subsequent HTTP probe returned 200.
+- Isolated fixture-helper checks initially failed due to an incorrect
+  group config path, then passing a dict where the helper expected Config.
+  Corrected invocation used the upstream Config loader and completed with
+  exit 0. All five role storage-state JSON files were present afterward.
+  This does not establish a complete permission matrix.
+- Provider preflight returned HTTP 200 for requested deepseek-chat, served
+  model deepseek-flash, 6 prompt tokens and 1 completion token. No key value
+  is included in the sanitized preflight output.
+- Launched first native MainDriver-only smoke using group-driver-smoke.yaml,
+  five-minute configured budget and a ten-minute outer watchdog. Raw run
+  directory: ~/BACFuzz-Project/.local/main-driver-Nov09-001/.
+- Campaign completed with exit 0, from 21:48:06 to 21:53:20 UTC (5m14s).
+- Final inventory: Admin 122 (69 GET, 53 POST); LeaveManager 61 (31 GET,
+  30 POST); Salary 82 (45 GET, 37 POST); BorrowManager 40 (25 GET, 15
+  POST); Anonymous 5 (3 GET, 2 POST). Total 310: 173 GET and 137 POST.
+  Rejected and unexpected entries: 0. Dictionary present; complete true;
+  inventory exit 0. This verifies structure, not authorization semantics.
+- Default group branch lacked the inventory helper. Preserved that error,
+  fetched and checked out the recorded group revision
+  31661519bb3f3d1790b233c66aee5a1e343bd496, then inventory passed.
+- Exact API-key scan: 372 evidence/corpus/login files examined, 0 matches.
+  Campaign shell key variable was cleared after the run.
+- Private stage outputs and exit records are stored on the runner under
+  ~/bacfuzz-evidence/restore-Nov09/ and setup logs under the checkout's
+  ignored .local/setup/ directory. The complete corpus, role states,
+  run metadata and restoration logs were copied to the persistent gateway:
+  /project/bacfuzz/evidence-Nov09-run001/. Owner/group bacfuzz access;
+  no world permissions. SHA256SUMS verification completed with exit 0.
+  Initial owner-only copies also exist at ~/BACFuzz-restore-Nov09/.
+
+Credential handling incident: a saved credential was inadvertently entered
+at a gateway shell prompt after an SSH sudo command had returned. A history
+deletion and terminal-clear command were executed. The owner was informed
+that rotation is needed. No credential value is recorded in this file.
+
+No other lab resources were modified. Runtime restoration, provider
+preflight and native MainDriver collection are now completed. ActiveChecker,
+semantic dictionary/replay validation, a complete permission matrix and
+permission-aware SQL vulnerability validation remain outstanding.
+
+Detailed lab record: docs/experiment-Nov09-main-driver.md.
+
+Browser-control startup initially timed out. Selecting the inventoried
+in-app tab by its browser/tab identifiers subsequently succeeded.

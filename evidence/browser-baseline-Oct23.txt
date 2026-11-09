@@ -1,0 +1,20 @@
+Normal-browser baseline — October 23, 2026
+This is a separate Playwright baseline, not a MainDriver campaign or vulnerability reproduction.
+Source: supplied CVE_2025_0802 application and auto-login fixture, pinned artifact revision 94470790c0941c7cb628712b81e10e154d97928a.
+Collector SHA256: 8d61c5bc21a999067efb579a10f1edaaa964039c617c190596108142bf8751bf
+Repository-copy SHA256: 40af653628da05a09f5782b2789aa782ce1b3a9b4c945a25a9c7b1180cd6ddf3
+The execution copy has one additional trailing newline from terminal transfer; its hash is recorded above.
+Execution: timeout --signal=TERM --kill-after=15s 4m xvfb-run -a .local/venv/bin/python -u .local/baseline/collect-baseline.py
+Exit status: 0. Four fixture-account contexts and an Anonymous context visited their landing pages. Each passed the collector's expected dashboard/login-page heuristic. This does not verify the full permission policy.
+
+Role             Local requests  HTTP 200  HTTP 403  Blocked external resources  HAR entries
+Admin            31              31        0         2                           33
+LeaveManager     31              30        1         2                           33
+Salary           31              30        1         2                           33
+BorrowManager    31              30        1         2                           33
+Anonymous        11              11        0         0                           11
+Total           135             132        3         8                          143
+All captured requests in these HAR files use GET. Counts include assets and represent five landing-page visits, not broad crawl coverage. Blocked external resources are excluded from the 135 local-request count. HTTP 403 responses have not been classified against intended permissions.
+
+Private HAR files, five login states, screenshots, collector source, logs and a reviewed JSON summary were saved together. They are not committed. MainDriver YAML/dictionary outputs were not produced; the HAR bundle is not a ready-to-replay ActiveChecker corpus.
+No DeepSeek call or checker run occurred in this baseline. No vulnerability was validated.
