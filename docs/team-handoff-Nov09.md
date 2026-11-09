@@ -2,21 +2,20 @@
 
 ## Pull the current work
 
-PR #2 is open. The updated branch is `progress/sphere-runtime-collection-handoff`; `main` does not yet contain the newer work.
+Use `main` for the shared work. PR #2 records the environment, collection and documentation integration.
 
 From an existing checkout with no conflicting local changes:
 
 ```sh
 git fetch origin
-git switch progress/sphere-runtime-collection-handoff
+git switch main
 git pull --ff-only
 ```
 
 For a new checkout:
 
 ```sh
-git clone --branch progress/sphere-runtime-collection-handoff \
-  https://github.com/IftatBhuiyan/BACFuzz-Project.git
+git clone https://github.com/IftatBhuiyan/BACFuzz-Project.git
 ```
 
 If Git reports local changes or a conflict, preserve that work and resolve it before switching. Do not reset or overwrite another member's changes.

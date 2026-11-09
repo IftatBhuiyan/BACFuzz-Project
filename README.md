@@ -3,7 +3,7 @@ Hunter College CSCI 493 · Presentation October 28, 2026
 
 We reproduce selected experiments from [websecfuzz/BACFuzz](https://github.com/websecfuzz/BACFuzz), “BACFuzz: Exposing the Silence on Broken Access Control Vulnerabilities in Web Applications.” This repository contains our setup, configuration, and evidence; upstream authors retain credit for their artifact. We have not reproduced a vulnerability yet.
 
-**Team handoff:** the latest collection work is on `progress/sphere-runtime-collection-handoff` in [PR #2](https://github.com/IftatBhuiyan/BACFuzz-Project/pull/2). Until that PR is merged, pulling `main` alone will not include it. See [what to pull and use next](docs/team-handoff-Nov09.md).
+**Team handoff:** use `main` for the latest shared collection work. See [what to pull and use next](docs/team-handoff-Nov09.md); [PR #2](https://github.com/IftatBhuiyan/BACFuzz-Project/pull/2) records the integration history.
 
 - [Setup and versions](docs/setup.md)
 - [MainDriver collection and handoff](docs/main-driver.md), including offline capture inventory
