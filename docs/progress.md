@@ -1,4 +1,26 @@
-# Progress — October 23, 2026
+# Progress
+
+## Latest verified work — November 9, 2026
+
+We restored the expired BACFuzz environment and completed our first native MainDriver-only campaign. The process exited 0 after 5 minutes 14 seconds. The structural inventory also exited 0: **310 captures (173 GET, 137 POST)** across Admin, LeaveManager, Salary, BorrowManager and Anonymous, with zero rejected/unexpected entries and the parameter dictionary present.
+
+The restored Linux runtime passed 4 checks, with 0 failures and 0 skips. Both target images built and both containers started. We retained internal networking and restored the loopback relay. The supplied login helper completed, and provider preflight returned HTTP 200 with served model `deepseek-flash`. The exact-key scan found zero matches in 372 files.
+
+The private collection, session states, configuration, logs and image/version metadata are backed up at `/project/bacfuzz/evidence-Nov09-run001/` on the BACFuzz gateway, with group access and no world access. The backup integrity manifest passed verification. Both SPHERE resources expire December 9 at 4 PM; a further extension is needed for the December 13 final because SPHERE permits at most 30 days ahead.
+
+See the [complete November lab record](experiment-Nov09-main-driver.md), [reviewed counts](../evidence/main-driver-Nov09-summary.json) and [readiness/error record](../evidence/sphere-readiness-Nov09.txt).
+
+### Next work
+
+1. Review representative native captures and intended account permissions with the group.
+2. Validate dictionary contents and ActiveChecker replay; structural completeness alone does not prove either.
+3. Coordinate Arian's checker/mutation work with Taamim's permission and SQL validation.
+4. Preserve/reset the target state appropriately before a new run, and record any model/configuration changes.
+5. Extend both SPHERE resources before December 9 to cover the final deadline.
+
+We have not run ActiveChecker or confirmed a vulnerability. The October baseline below is historical evidence from a different collector.
+
+## Historical record — October 23, 2026
 
 We prepared Iftat's shared setup and MainDriver portion without changing the upstream research source. [PR #1](https://github.com/IftatBhuiyan/BACFuzz-Project/pull/1) contains the setup snapshot, dependency recovery, runtime tooling, validation evidence and remaining blockers.
 

@@ -3,6 +3,10 @@
 ## Provenance
 We use [websecfuzz/BACFuzz](https://github.com/websecfuzz/BACFuzz) at commit `94470790c0941c7cb628712b81e10e154d97928a`, recorded in `upstream.lock`. The authors' full checkout stays under ignored `.upstream/BACFuzz`; their existing results are not our experimental data. We do not edit or relicense their source. No root license file was found in the pinned artifact.
 
+## November 9 restoration note
+
+The expired reservation was redeployed; node-local installations had to be restored. Dependency/runtime validation and the first native MainDriver-only collection now pass. Use group revision `31661519bb3f3d1790b233c66aee5a1e343bd496` for the inventory tooling; the default branch initially lacked that helper. See [the complete restoration and experiment record](experiment-Nov09-main-driver.md) for the current resources, isolation fixes, errors, commands and evidence. Both reservation and gateway currently expire December 9, 2026, at 4 PM, requiring another extension for the December 13 final. October resource names/expiry below are historical.
+
 ## Repeatable dependency setup
 Use a dedicated disposable Linux VM for experiments. Python 3.11 is our locally validated baseline; Linux dependency and browser preparation also passed on October 23; target and campaign evidence remain separate. The setup command also works for local preparation without launching a target.
 
