@@ -1,8 +1,11 @@
 # BACFuzz: environment restoration and first native MainDriver collection
 
-**Course:** Hunter College CSCI 493 — Introduction to Computer Security  
-**Work date:** November 9, 2026  
-**Group:** Iftat Bhuiyan, Arian Berisha and Taamim Naamid  
+**Course:** Hunter College CSCI 493 — Introduction to Computer Security
+
+**Work date:** November 9, 2026
+
+**Group:** Iftat Bhuiyan, Arian Berisha and Taamim Naamid
+
 **Work area:** Iftat's environment preparation, configuration, request collection and evidence preservation
 
 ## 1. Purpose and outcome
